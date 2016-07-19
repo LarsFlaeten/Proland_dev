@@ -1,0 +1,8 @@
+# Ignore all builds
+/build/
+# Ignore bin outut directory
+/bin/
+# Ignore library output directory
+/lib/
+# Ignore demo dir (for now)
+/demo/
