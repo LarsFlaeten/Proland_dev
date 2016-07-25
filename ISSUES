@@ -1,0 +1,3 @@
+TileSamplerZ:
+The shader code uses 8 uniformSamplers. These are initialised in a map from parsing the shader code. But all 8 are not allways used, and when attachin a TileStorage with less than 8 textures, the remaining uniformSamplers are not sets. This generates an error when checking samplers from MeshBuffers.cpp. I don't think this is an issue though, and the error can possible be ignored until further, but this issue should be fixed.
+
