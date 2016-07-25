@@ -73,7 +73,8 @@ public:
 
          ptr<XMLResourceLoader> resLoader = new XMLResourceLoader();
         resLoader->addPath(".");
-        resLoader->addPath("../common/");
+        resLoader->addPath("./config");
+        resLoader->addPath("../common");
         resLoader->addArchive("helloworld.xml");
 
         ptr<ResourceManager> resManager = new ResourceManager(resLoader, 8);
