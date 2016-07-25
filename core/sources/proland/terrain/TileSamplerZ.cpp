@@ -66,6 +66,7 @@ void main() {\n\
 uniform vec3 sizes; // size of parent and current tiles in pixels, pass\n\
 uniform ivec4 tiles[32];\n\
 uniform sampler2DArray inputs[8];\n\
+//uniform sampler2DArray inputs[1];\n\
 uniform sampler2D input_;\n\
 layout(location=0) out vec4 data;\n\
 void main() {\n\
@@ -223,11 +224,23 @@ TileSamplerZ::State::State(ptr<GPUTileStorage> storage) :
     inputU = minmaxProg->getUniformSampler("input_");
     ptr<Sampler> s = new Sampler(Sampler::Parameters().min(NEAREST).mag(NEAREST));
     char buf[256];
+    // An error here..
+    // This will init the Program witht he amount of UniformSamplers
+    // that storage->textures have (usually 1? Check the other examples)
+    assert(storage->getTextureCount()==1);
+    // But the minmaxprogram have 8 uniformSamplers (from parsing
+    // the shader code). Should we try to remove these? Is it even possible
+    // With the class setup of Program in Ork today?
+    // Another fix is to set the last texture of storage to the remaining
+    // uniformSamplers to avoid complaints from OpenGl/Program::checkSamplers
+    Logger::INFO_LOGGER->logf("TILESAMPLERZ","Storage textures: %d", storage->getTextureCount());
     for (int i = 0; i < storage->getTextureCount(); ++i) {
+        Logger::INFO_LOGGER->logf("TILESAMPLERZ","inputs[%d]", i);
         sprintf(buf, "inputs[%d]", i);
         minmaxProg->getUniformSampler(string(buf))->set(storage->getTexture(i));
         minmaxProg->getUniformSampler(string(buf))->setSampler(s);
     }
+    
     for (int i = 0; i < MAX_MIPMAP_PER_FRAME; ++i) {
         sprintf(buf, "tiles[%d]", i);
         tileU.push_back(minmaxProg->getUniform4i(string(buf)));
