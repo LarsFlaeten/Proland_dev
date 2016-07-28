@@ -43,7 +43,7 @@
 #define _PROLAND_TWEAKRESOURCE_H_
 
 #include <vector>
-#include "tinyxml/tinyxml.h"
+#include "ork/resource/tinyxml/tinyxml.h"
 
 #include "ork/resource/ResourceManager.h"
 #include "proland/ui/twbar/TweakBarHandler.h"
