@@ -1,0 +1,10 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+libdir=${prefix}/@LIB_INSTALL_DIR@
+includedir=${prefix}/include
+
+Name: proland terrain
+Description: OpenGL Rendering Kernel
+Version: @PROLAND_VERSION@
+Requires:
+Libs: -L${libdir} -lproland-terrain
+Cflags: -I${includedir} @ORK_CFLAGS@
