@@ -65,10 +65,11 @@ layout(location=0) in vec4 vertex;\n\
 void main () { gl_Position = vertex; }\n\
 #endif\n\
 #ifdef _GEOMETRY_\n\
-#extension GL_EXT_geometry_shader4 : enable\n\
+//#extension GL_EXT_geometry_shader4 : enable\n\
 layout(triangles) in;\n\
 layout(triangle_strip,max_vertices=3) out;\n\
-void main() { gl_Layer = bufferLayerLevelWidth.y; gl_Position = gl_PositionIn[0]; EmitVertex(); gl_Position = gl_PositionIn[1]; EmitVertex(); gl_Position = gl_PositionIn[2]; EmitVertex(); EndPrimitive(); }\n\
+//void main() { gl_Layer = bufferLayerLevelWidth.y; gl_Position = gl_PositionIn[0]; EmitVertex(); gl_Position = gl_PositionIn[1]; EmitVertex(); gl_Position = gl_PositionIn[2]; EmitVertex(); EndPrimitive(); }\n\
+void main() { gl_Layer = bufferLayerLevelWidth.y; gl_Position = gl_in[0].gl_Position; EmitVertex(); gl_Position = gl_in[1].gl_Position; EmitVertex(); gl_Position = gl_in[2].gl_Position; EmitVertex(); EndPrimitive(); }\n\
 #endif\n\
 #ifdef _FRAGMENT_\n\
 uniform sampler2DArray input_[8];\n\
