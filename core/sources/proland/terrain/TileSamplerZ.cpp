@@ -65,8 +65,8 @@ void main() {\n\
 #ifdef _FRAGMENT_\n\
 uniform vec3 sizes; // size of parent and current tiles in pixels, pass\n\
 uniform ivec4 tiles[32];\n\
-uniform sampler2DArray inputs[8];\n\
-//uniform sampler2DArray inputs[1];\n\
+//uniform sampler2DArray inputs[8];\n\
+uniform sampler2DArray inputs[1];\n\
 uniform sampler2D input_;\n\
 layout(location=0) out vec4 data;\n\
 void main() {\n\
@@ -83,7 +83,7 @@ void main() {\n\
                 r[i] = textureLod(inputs[0], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
             }\n\
             break;\n\
-        case 1:\n\
+/*        case 1:\n\
             for (int i = 0; i < 16; ++i) {\n\
                 r[i] = textureLod(inputs[1], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
             }\n\
@@ -118,7 +118,7 @@ void main() {\n\
                 r[i] = textureLod(inputs[7], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
             }\n\
             break;\n\
-        }\n\
+*/        }\n\
     } else {\n\
         vec2 tile = floor(ij / sizes.y);\n\
         vec2 uvmax = vec2(tile * sizes.x + vec2(sizes.x - 0.5));\n\
