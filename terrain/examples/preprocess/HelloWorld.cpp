@@ -39,7 +39,7 @@
  * Main authors: Eric Bruneton, Antoine Begault, Guillaume Piolat.
  */
 
-#include "stbi/stb_image.h"
+#include "ork/resource/stbi/stb_image.h"
 
 #include "ork/core/FileLogger.h"
 #include "ork/render/FrameBuffer.h"
