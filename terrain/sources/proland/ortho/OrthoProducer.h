@@ -188,6 +188,8 @@ private:
     int maxLevel;
 
     ptr<Texture2DArray> noiseTexture;
+    
+    ptr<Texture2DArray> dummy;
 
     vec4f rootNoiseColor;
 
