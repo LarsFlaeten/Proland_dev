@@ -111,9 +111,9 @@
             <module id="material" value="terrainShader"/>
         </node>
 
-        <node flags="overlay">
+        <!--node flags="overlay">
             <method id="draw" value="drawTweakBarMethod"/>
-        </node>
+        </node-->
         <node flags="overlay">
             <method id="draw" value="logMethod"/>
         </node>
