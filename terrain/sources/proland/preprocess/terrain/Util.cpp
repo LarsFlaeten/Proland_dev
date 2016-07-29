@@ -47,6 +47,9 @@
 #include <assert.h>
 #include <fcntl.h>
 
+// Lars F: addition, since they use close() below
+#include <unistd.h>
+
 #include "ork/core/Object.h"
 
 namespace proland
