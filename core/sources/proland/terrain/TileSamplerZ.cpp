@@ -46,6 +46,8 @@
 #include "proland/producer/GPUTileStorage.h"
 #include "proland/terrain/TerrainNode.h"
 
+#include <fstream>
+
 using namespace std;
 using namespace ork;
 
@@ -65,8 +67,30 @@ void main() {\n\
 #ifdef _FRAGMENT_\n\
 uniform vec3 sizes; // size of parent and current tiles in pixels, pass\n\
 uniform ivec4 tiles[32];\n\
-//uniform sampler2DArray inputs[8];\n\
+#ifdef NUM_INPUTS_1\n\
 uniform sampler2DArray inputs[1];\n\
+#endif\n\
+#ifdef NUM_INPUTS_2\n\
+uniform sampler2DArray inputs[2];\n\
+#endif\n\
+#ifdef NUM_INPUTS_3\n\
+uniform sampler2DArray inputs[3];\n\
+#endif\n\
+#ifdef NUM_INPUTS_4\n\
+uniform sampler2DArray inputs[4];\n\
+#endif\n\
+#ifdef NUM_INPUTS_5\n\
+uniform sampler2DArray inputs[5];\n\
+#endif\n\
+#ifdef NUM_INPUTS_6\n\
+uniform sampler2DArray inputs[6];\n\
+#endif\n\
+#ifdef NUM_INPUTS_7\n\
+uniform sampler2DArray inputs[7];\n\
+#endif\n\
+#ifdef NUM_INPUTS_8\n\
+uniform sampler2DArray inputs[8];\n\
+#endif\n\
 uniform sampler2D input_;\n\
 layout(location=0) out vec4 data;\n\
 void main() {\n\
@@ -78,12 +102,167 @@ void main() {\n\
         vec4 u = min(vec4(uv.x, uv.x + 1.0, uv.x + 2.0, uv.x + 3.0), uv.zzzz) / sizes.x;\n\
         vec4 v = min(vec4(uv.y, uv.y + 1.0, uv.y + 2.0, uv.y + 3.0), uv.wwww) / sizes.x;\n\
         switch (tile.x) {\n\
+#ifdef NUM_INPUTS_1\n\
         case 0:\n\
             for (int i = 0; i < 16; ++i) {\n\
                 r[i] = textureLod(inputs[0], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
             }\n\
             break;\n\
-/*        case 1:\n\
+#endif\n\
+#ifdef NUM_INPUTS_2\n\
+        case 0:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[0], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 1:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[1], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+#endif\n\
+#ifdef NUM_INPUTS_3\n\
+        case 0:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[0], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 1:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[1], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 2:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[2], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+#endif\n\
+#ifdef NUM_INPUTS_4\n\
+        case 0:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[0], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 1:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[1], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 2:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[2], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 3:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[3], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+#endif\n\
+#ifdef NUM_INPUTS_5\n\
+        case 0:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[0], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 1:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[1], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 2:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[2], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 3:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[3], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 4:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[4], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+#endif\n\
+#ifdef NUM_INPUTS_6\n\
+        case 0:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[0], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 1:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[1], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 2:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[2], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 3:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[3], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 4:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[4], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 5:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[5], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+#endif\n\
+#ifdef NUM_INPUTS_7\n\
+        case 0:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[0], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 1:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[1], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 2:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[2], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 3:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[3], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 4:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[4], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 5:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[5], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 6:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[6], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+#endif\n\
+#ifdef NUM_INPUTS_8\n\
+        case 0:\n\
+            for (int i = 0; i < 16; ++i) {\n\
+                r[i] = textureLod(inputs[0], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
+            }\n\
+            break;\n\
+        case 1:\n\
             for (int i = 0; i < 16; ++i) {\n\
                 r[i] = textureLod(inputs[1], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
             }\n\
@@ -118,7 +297,8 @@ void main() {\n\
                 r[i] = textureLod(inputs[7], vec3(u[i/4], v[i%4], tile.y), 0.0).zz;\n\
             }\n\
             break;\n\
-*/        }\n\
+#endif\n\
+        }\n\
     } else {\n\
         vec2 tile = floor(ij / sizes.y);\n\
         vec2 uvmax = vec2(tile * sizes.x + vec2(sizes.x - 0.5));\n\
@@ -218,7 +398,20 @@ TileSamplerZ::State::State(ptr<GPUTileStorage> storage) :
     readBuffer = pass % 2 == 0 ? COLOR0 : COLOR1;
     fbo->setReadBuffer(readBuffer);
 
-    minmaxProg = new Program(new Module(330, minmaxShader));
+    // Add define according to number of inputs:
+    std::string minmaxShaderDefined;
+    char define[128];
+    sprintf(define, "NUM_INPUTS_%d", storage->getTextureCount());
+    Module::addDefine(minmaxShader, define, minmaxShaderDefined);
+
+/*    { // DEBUG
+        std::ofstream os;
+        os.open("shader.source", ios::out);
+        os << minmaxShaderDefined;
+        os.close();
+    }*/
+    
+    minmaxProg = new Program(new Module(330, minmaxShaderDefined.c_str()));
     viewportU = minmaxProg->getUniform4f("viewport");
     sizesU = minmaxProg->getUniform3f("sizes");
     inputU = minmaxProg->getUniformSampler("input_");
