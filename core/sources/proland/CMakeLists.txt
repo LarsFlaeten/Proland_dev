@@ -1,7 +1,8 @@
 set(LIBNAME "proland-core")
 
 # Sources
-message(STATUS "Proland core")
+message(STATUS "****    Proland core    ****")
+message(STATUS "PROJECT_SOURCE_DIR: " ${PROJECT_SOURCE_DIR})
 set(PROLAND_CORE_SOURCES "${PROJECT_SOURCE_DIR}/core/sources" CACHE INTERNAL "")
 message(STATUS "PROLAND_CORE_SOURCES: ${PROLAND_CORE_SOURCES}")
 include_directories(${PROLAND_CORE_SOURCES} ${PROJECT_SOURCE_DIR}/libraries)
@@ -28,7 +29,7 @@ target_link_libraries(${LIBNAME} ${LIBS})
 #SET_TARGET_PROPERTIES(${LIBNAME} PROPERTIES SOVERSION ${ORK_VERSION_MAJOR} VERSION ${ORK_VERSION})
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
-
+message(STATUS "Output path for " ${LIBNAME} " is " ${LIBRARY_OUTPUT_PATH})
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 # Install headers
