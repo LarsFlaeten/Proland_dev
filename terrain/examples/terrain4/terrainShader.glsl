@@ -71,7 +71,7 @@ void main() {
 #endif
 
 #ifdef _GEOMETRY_
-#extension GL_EXT_geometry_shader4 : enable
+//#extension GL_EXT_geometry_shader4 : enable
 
 layout (lines_adjacency) in;
 layout (triangle_strip,max_vertices=4) out;
@@ -81,7 +81,7 @@ in vec2 uvIn[];
 out vec2 uv;
 
 void emit(int i) {
-    gl_Position = gl_PositionIn[i];
+    gl_Position = gl_in[i].gl_Position;
     uv = uvIn[i];
     EmitVertex();
 }
@@ -116,7 +116,7 @@ void main() {
     float light = dot(n, normalize(vec3(1.0)));
     data.rgb *= 0.5 + 0.75 * light;
 
-    //data.r += mod(dot(floor(deformation.offset.xy / deformation.offset.z + 0.5), vec2(1.0)), 2.0);
+    data.r += mod(dot(floor(deformation.offset.xy / deformation.offset.z + 0.5), vec2(1.0)), 2.0);
 }
 
 #endif
