@@ -91,7 +91,7 @@ TweakBarManager::TweakBarManager() : EventHandler("TweakBarManager")
 TweakBarManager::TweakBarManager(vector<BarData> bars, bool minimized) : EventHandler("TweakBarManager")
 {
     assert(FrameBuffer::getError() == 0);
-    TwInit(TW_OPENGL, NULL);
+    TwInit(TW_OPENGL_CORE, NULL);
     assert(FrameBuffer::getError() == 0);
     init(bars, minimized);
     assert(FrameBuffer::getError() == 0);
@@ -508,7 +508,7 @@ public:
             const TiXmlElement *e = NULL) :
         ResourceTemplate<0, TweakBarManager> (manager, name, desc)
     {
-        TwInit(TW_OPENGL, NULL);
+        TwInit(TW_OPENGL_CORE, NULL);
 
         e = e == NULL ? desc->descriptor : e;
 
