@@ -177,6 +177,12 @@ private:
     ptr<Program> selectProg;
     ptr<Uniform4f> selectPositionU;
 
+    // DUmmies:
+    ptr<Texture> dummy1D;
+    ptr<Texture> dummy2D;
+    ptr<Texture> dummy2DA;
+    ptr<Texture> dummy3D;
+
     MODE mode;
 
     vec2f lastPos;

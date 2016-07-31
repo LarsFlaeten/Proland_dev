@@ -42,7 +42,8 @@
 #include "proland/ui/twbar/TweakSceneGraph.h"
 
 #include "ork/resource/ResourceTemplate.h"
-
+#include "ork/render/Texture1D.h"
+#include "ork/render/Buffer.h"
 #include "proland/producer/GPUTileStorage.h"
 #include "proland/terrain/TileSampler.h"
 #include "proland/particles/ParticleProducer.h"
@@ -539,6 +540,19 @@ void TweakSceneGraph::init(ptr<SceneNode> scene, bool active)
     renderGridU = renderProg->getUniform3i("grid");
     selectProg = new Program(new Module(330, selectShader));
     selectPositionU = selectProg->getUniform4f("position");
+
+    // Init dummy textures to avoid unbound samplers
+    int tw = 4;
+    int th = 4;
+    int tl = 4;
+    unsigned char *array = new unsigned char[tl * tw * th * 4];
+    Texture::Parameters params = Texture::Parameters().wrapS(REPEAT).wrapT(REPEAT).min(NEAREST).mag(NEAREST);
+    CPUBuffer pixels(array);
+    dummy1D  = new Texture1D(tw, RGBA8, RGBA, UNSIGNED_BYTE, params, Buffer::Parameters(), pixels );
+    dummy2D  = new Texture2D(tw, th, RGBA8, RGBA, UNSIGNED_BYTE, params, Buffer::Parameters(), pixels );
+    dummy2DA = new Texture2DArray(tw, th, tl, RGBA8, RGBA, UNSIGNED_BYTE, params, Buffer::Parameters(), pixels);
+    dummy3D = new Texture2DArray(tw, th, tl, RGBA8, RGBA, UNSIGNED_BYTE, params, Buffer::Parameters(), pixels);
+    delete[] array;
 }
 
 TweakSceneGraph::~TweakSceneGraph()
@@ -630,23 +644,35 @@ void TweakSceneGraph::redisplay(double t, double dt, bool &needUpdate)
         switch (type) {
             case 0:
                 renderTexture1DU->set(currentInfo->tex);
+                renderTexture2DU->set(dummy2D);
+                renderTexture2DArrayU->set(dummy2DA);
+                renderTexture3DU->set(dummy3D);
                 renderGridU->set(vec3i::ZERO);
                 break;
             case 1:
+                renderTexture1DU->set(dummy1D);
                 renderTexture2DU->set(currentInfo->tex);
+                renderTexture2DArrayU->set(dummy2DA);
+                renderTexture3DU->set(dummy3D);
                 renderGridU->set(vec3i::ZERO);
                 break;
             case 2:
                 l = currentInfo->tex.cast<Texture2DArray>()->getLayers();
                 w = (int) sqrt(float(l));
                 h = l % w == 0 ? l / w : l / w + 1;
+                renderTexture1DU->set(dummy1D);
+                renderTexture2DU->set(dummy2D);
                 renderTexture2DArrayU->set(currentInfo->tex);
+                renderTexture3DU->set(dummy3D);
                 renderGridU->set(vec3i(w, h, l));
                 break;
             case 3:
                 l = currentInfo->tex.cast<Texture3D>()->getDepth();
                 w = (int) sqrt(float(l));
                 h = l % w == 0 ? l / w : l / w + 1;
+                renderTexture1DU->set(dummy1D);
+                renderTexture2DU->set(dummy2D);
+                renderTexture2DArrayU->set(dummy2DA);
                 renderTexture3DU->set(currentInfo->tex);
                 renderGridU->set(vec3i(w, h, l));
                 break;
