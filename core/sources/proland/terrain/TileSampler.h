@@ -215,6 +215,17 @@ public:
     void setTileMap();
 
     /**
+     * Lars F bugfix 01.08.2016:
+     * Sets the GLSL uniforms necessary to avoid unbound textures. This
+     * method should be called when setTileMap() is not called, and is a
+     * hack/bugfix, maybe not very elegant...
+     * This method does nothing if terrains have
+     * not been associated with this uniform. These terrains must be all
+     * the terrains for which the tile map may be used on GPU.
+     */
+    void setDummyTileMap();
+    
+    /**
      * Returns the task %graph necessary to create new texture tiles for
      * newly created quads in the given %terrain quadtree (and to release
      * tiles for destroyed quads). This method returns an empty task %graph
@@ -394,6 +405,13 @@ private:
      */
     std::vector< ptr<Uniform4f> > cameraU;
 
+    /**
+     * Dummy texture to be bound to terrainShader
+     * when no TileMap is set by DrawTerrainTask
+     * Bug from examples/terrain5
+     */
+    ptr<Texture2D>  dummyTileMap2D;
+    
     /**
      * True to store texture tiles for leaf quads.
      */

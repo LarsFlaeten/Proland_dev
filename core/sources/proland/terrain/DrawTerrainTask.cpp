@@ -134,6 +134,10 @@ bool DrawTerrainTask::Impl::run()
             if (u != NULL) {
                 if (u->getTerrain(0) != NULL) {
                     u->setTileMap();
+                } else
+                {
+                    // Fix bug with tilemap not being bound
+                    u->setDummyTileMap();
                 }
                 if (u->getStoreLeaf() && u->getTerrain(0) == NULL) {
                     uniforms.push_back(u);
