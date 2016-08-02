@@ -7,7 +7,7 @@ set(PROLAND_CORE_SOURCES "${PROJECT_SOURCE_DIR}/core/sources" CACHE INTERNAL "")
 message(STATUS "PROLAND_CORE_SOURCES: ${PROLAND_CORE_SOURCES}")
 include_directories(${PROLAND_CORE_SOURCES} ${PROJECT_SOURCE_DIR}/libraries)
 
-file(GLOB SOURCE_FILES *.cpp */*.cpp ui/twbar/*.cpp)
+file(GLOB SOURCE_FILES *.cpp */*.cpp ui/twbar/*.cpp particles/screen/*.cpp particles/terrain/*.cpp)
 
 # Libraries
 set(LIBS "")
@@ -33,7 +33,7 @@ message(STATUS "Output path for " ${LIBNAME} " is " ${LIBRARY_OUTPUT_PATH})
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 # Install headers
-FOREACH(subdir math particles producer terrain ui ui/twbar util)
+FOREACH(subdir math particles particles/screen particles/terrain producer terrain ui ui/twbar util)
   FILE(GLOB include-files ${subdir}/*.h)
   INSTALL(FILES ${include-files} DESTINATION include/proland/${subdir})
 ENDFOREACH(subdir)
