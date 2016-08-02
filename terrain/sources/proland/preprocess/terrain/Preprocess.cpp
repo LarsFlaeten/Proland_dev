@@ -508,7 +508,11 @@ public:
 
 void createDir(const string &dir)
 {
-    unsigned int index = dir.find_last_of('/');
+    // Bug here, as unsigned int may not be the same as
+    // size_t, and hence the if-claue below may fail
+    // Change to size_t
+    size_t index = dir.find_last_of('/');
+    
     if (index != string::npos) {
         FILE *f;
         fopen(&f, dir.substr(0, index).c_str(), "r");
