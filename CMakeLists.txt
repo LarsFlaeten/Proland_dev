@@ -50,6 +50,7 @@ add_subdirectory(terrain)
 #add_subdirectory(ocean)
 #add_subdirectory(forest)
 #add_subdirectory(river)
+add_subdirectory(graph)
 #add_subdirectory(edit)
 
 if(BUILD_EXAMPLES)
