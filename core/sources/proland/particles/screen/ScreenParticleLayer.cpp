@@ -41,7 +41,7 @@
 
 #include "proland/particles/screen/ScreenParticleLayer.h"
 
-#include "pmath.h"
+#include "ork/math/pmath.h"
 
 #include "ork/render/Program.h"
 #include "ork/resource/ResourceTemplate.h"
