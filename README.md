@@ -23,6 +23,16 @@ Proland is made of a core library and of 7 plugins:
 * River plugin
 * Edit plugin
 
+##Screen Shots
+
+![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/Procedural_landscape_test.png "Procedural landscape test")
+
+![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/first_procedural_planet.png "First procedural planet")
+
+![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/blue_marble_test.png "First earth test (with low res texture)")
+
 ## Current status
-The core librabry with examples is fully tested and included. Terrain plugin is under development.
+* The core librabry with examples is fully tested and included.
+* The Terrain plugin with examples is fully tested and included.
+* The Graph and Edit plugins are under testing/development.
 
