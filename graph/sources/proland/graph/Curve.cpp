@@ -317,7 +317,7 @@ CurvePtr Curve::getNext(const NodePtr n, const std::set<CurveId> &excludedCurves
     vector<CurvePtr> ncurves;
     for (int i = 0; i < n->getCurveCount(); ++i) {
         CurvePtr nc = n->getCurve(i);
-        if (nc != this && excludedCurves.find(nc->getId()) == excludedCurves.end()) {
+        if (nc.get() != this && excludedCurves.find(nc->getId()) == excludedCurves.end()) {
             ncurves.push_back(nc);
         }
     }

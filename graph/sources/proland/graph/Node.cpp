@@ -107,13 +107,13 @@ NodePtr Node::getOpposite(const NodePtr n) const
     NodePtr c0b = c0->getEnd();
     NodePtr c1a = c1->getStart();
     NodePtr c1b = c1->getEnd();
-    if (c0a != this && c0a != n) {
+    if (c0a.get() != this && c0a != n) {
         return c0a;
-    } else if (c0b != this && c0b != n) {
+    } else if (c0b.get() != this && c0b != n) {
         return c0b;
-    } else if (c1a != this && c1a != n) {
+    } else if (c1a.get() != this && c1a != n) {
         return c1a;
-    } else if (c1b != this && c1b != n) {
+    } else if (c1b.get() != this && c1b != n) {
         return c1b;
     }
     return NULL;
