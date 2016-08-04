@@ -42,6 +42,9 @@ option(BUILD_SHARED      "Build shared library instead of static"   OFF)
 option(BUILD_EXAMPLES    "Build examples"                           ON )
 #option(BUILD_TESTS       "Build tests"                              ON )
 
+#General compiler options:
+message(STATUS "CXX FLAGS: " ${CMAKE_CXX_FLAGS})
+
 # Sub dirs
 #add_subdirectory(libraries)
 add_subdirectory(core)
@@ -56,6 +59,7 @@ add_subdirectory(graph)
 if(BUILD_EXAMPLES)
 	add_subdirectory(core/examples)
     add_subdirectory(terrain/examples)
+    add_subdirectory(graph/examples)
 endif(BUILD_EXAMPLES)
 
 #if(BUILD_TESTS)
