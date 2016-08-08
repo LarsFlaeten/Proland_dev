@@ -181,7 +181,8 @@ public:
          */
         void add(T* t, bool modified = false)
         {
-            typename set<ptr<T> >::iterator i = find(changedResources.begin(), changedResources.end(), t);
+            ptr<T> ptrt(t);
+            typename set<ptr<T> >::iterator i = find(changedResources.begin(), changedResources.end(), ptrt);
             if (i != changedResources.end()) {
                 return;
             }
