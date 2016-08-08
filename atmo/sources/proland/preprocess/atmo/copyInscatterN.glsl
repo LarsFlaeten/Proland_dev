@@ -78,19 +78,19 @@ void main() {\n\
 #endif\n\
 \n\
 #ifdef _GEOMETRY_\n\
-#extension GL_EXT_geometry_shader4 : enable\n\
+//#extension GL_EXT_geometry_shader4 : enable\n\
 \n\
 layout(triangles) in;\n\
 layout(triangle_strip,max_vertices=3) out;\n\
 \n\
 void main() {\n\
-    gl_Position = gl_PositionIn[0];\n\
+    gl_Position = gl_in[0].gl_Position;\n\
     gl_Layer = layer;\n\
     EmitVertex();\n\
-    gl_Position = gl_PositionIn[1];\n\
+    gl_Position = gl_in[1].gl_Position;\n\
     gl_Layer = layer;\n\
     EmitVertex();\n\
-    gl_Position = gl_PositionIn[2];\n\
+    gl_Position = gl_in[2].gl_Position;\n\
     gl_Layer = layer;\n\
     EmitVertex();\n\
     EndPrimitive();\n\
