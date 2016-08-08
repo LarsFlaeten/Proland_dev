@@ -498,8 +498,8 @@ void LazyGraph::releaseNode(NodeId id)
         }
         return;
     }
-
-    if (find(nodeCache->changedResources.begin(), nodeCache->changedResources.end(), i->second) != nodeCache->changedResources.end()) {
+    ptr<Node>n(i->second);
+    if (find(nodeCache->changedResources.begin(), nodeCache->changedResources.end(), n) != nodeCache->changedResources.end()) {
         return;
     }
 
@@ -509,6 +509,10 @@ void LazyGraph::releaseNode(NodeId id)
     } else {
         // if there is no cache of unused resources, then we delete resources as
         // soon as they become unused
+        // DEBUG:
+        // Check if there are other strong pointer to this:
+        n.reset();
+        assert(i->second->ref_this.expired());
         delete i->second;
     }
 }
@@ -525,14 +529,18 @@ void LazyGraph::releaseCurve(CurveId id)
         }
         return;
     }
-
-    if (find(curveCache->changedResources.begin(), curveCache->changedResources.end(), i->second) != curveCache->changedResources.end()) {
+    ptr<Curve> c(i->second);
+    if (find(curveCache->changedResources.begin(), curveCache->changedResources.end(), c) != curveCache->changedResources.end()) {
         return;
     }
 
     if (curveCache->size > 0) {
         curveCache->add(i->second);
     } else {
+        // DEBUG:
+        // Check if there are other strong pointer to this:
+        c.reset();
+        assert(i->second->ref_this.expired());                
         delete i->second;
     }
 }
@@ -550,13 +558,18 @@ void LazyGraph::releaseArea(AreaId id)
         return;
     }
 
-    if (find(areaCache->changedResources.begin(), areaCache->changedResources.end(), i->second) != areaCache->changedResources.end()) {
+    ptr<Area> a(i->second);
+    if (find(areaCache->changedResources.begin(), areaCache->changedResources.end(), a) != areaCache->changedResources.end()) {
         return;
     }
 
     if (areaCache->size > 0) {
         areaCache->add(i->second);
     } else {
+        // DEBUG:
+        // Check if there are other strong pointer to this:
+        a.reset();
+        assert(i->second->ref_this.expired());   
         delete i->second;
     }
 }
