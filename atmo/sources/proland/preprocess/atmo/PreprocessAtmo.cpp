@@ -81,7 +81,7 @@
 
 #include "ork/core/Logger.h"
 #include "ork/render/FrameBuffer.h"
-#include "ork/ui/GlutWindow.h"
+#include "ork/ui/GlfwWindow.h"
 
 #include "proland/preprocess/atmo/constants.glsl"
 #include "proland/preprocess/atmo/common.glsl"
@@ -111,7 +111,7 @@ AtmoParameters::AtmoParameters() : Rg(6360.0), Rt(6420.0), RL(6421.0),
 {
 }
 
-class PreprocessAtmo : public GlutWindow
+class PreprocessAtmo : public GlfwWindow
 {
 public:
     AtmoParameters params;
@@ -137,7 +137,7 @@ public:
     int order;
 
     PreprocessAtmo(const AtmoParameters &params, const char *output) :
-        GlutWindow(Window::Parameters().size(256, 256)), params(params), output(output)
+        GlfwWindow(Window::Parameters().size(256, 256)), params(params), output(output)
     {
         Logger::INFO_LOGGER = NULL;
 
@@ -427,7 +427,7 @@ public:
     void redisplay(double t, double dt)
     {
         preprocess();
-        GlutWindow::redisplay(t, dt);
+        GlfwWindow::redisplay(t, dt);
     }
 
     static static_ptr<Window> app;
