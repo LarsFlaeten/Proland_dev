@@ -75,8 +75,8 @@ void RoadOrthoLayer::init(ptr<GraphProducer> graphProducer, ptr<Program> layerPr
     this->border_width = border_width;
     this->inner_border_width = inner_border_width;
 
-    this->mesh = new Mesh<vec2f, unsigned int>(TRIANGLE_STRIP, CPU);
-    this->meshuv = new Mesh<vec4f, unsigned int>(TRIANGLE_STRIP, CPU);
+    this->mesh = new Mesh<vec2f, unsigned int>(TRIANGLE_STRIP, GPU_DYNAMIC);
+    this->meshuv = new Mesh<vec4f, unsigned int>(TRIANGLE_STRIP, GPU_DYNAMIC);
     this->mesh->addAttributeType(0, 2, A32F, false);   // pos
     this->meshuv->addAttributeType(0, 2, A32F, false); // pos
     this->meshuv->addAttributeType(1, 2, A32F, false); // uv
