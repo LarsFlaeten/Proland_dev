@@ -107,7 +107,7 @@ protected:
         this->fontHeight = fontHeight;
         this->fontU = p->getUniformSampler("font");
         if (fontMesh == NULL) {
-            fontMesh = new Mesh<Font::Vertex, unsigned int>(TRIANGLES, CPU);
+            fontMesh = new Mesh<Font::Vertex, unsigned int>(TRIANGLES, GPU_DYNAMIC);
             fontMesh->addAttributeType(0, 4, A16F, false);
             fontMesh->addAttributeType(1, 4, A8UI, true);
         }
