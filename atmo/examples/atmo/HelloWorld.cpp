@@ -46,7 +46,7 @@
 #include "ork/scenegraph/AbstractTask.h"
 #include "ork/scenegraph/SceneManager.h"
 #include "ork/scenegraph/ShowLogTask.h"
-#include "ork/ui/GlutWindow.h"
+#include "ork/ui/GlfwWindow.h"
 
 #include "proland/preprocess/atmo/PreprocessAtmo.h"
 #include "proland/ui/BasicViewHandler.h"
@@ -55,7 +55,7 @@
 using namespace ork;
 using namespace proland;
 
-class HelloWorld : public GlutWindow, public ViewManager
+class HelloWorld : public GlfwWindow, public ViewManager
 {
 public:
     ptr<SceneManager> scene;
@@ -63,7 +63,7 @@ public:
     ptr<BasicViewHandler> view;
     ptr<EventHandler> ui;
 
-    HelloWorld() : GlutWindow(Window::Parameters().size(1024, 768))
+    HelloWorld() : GlfwWindow(Window::Parameters().size(1024, 768))
     {
     }
 
@@ -78,7 +78,7 @@ public:
         }
 
         ui->redisplay(t, dt);
-        GlutWindow::redisplay(t, dt);
+        GlfwWindow::redisplay(t, dt);
 
         if (Logger::ERROR_LOGGER != NULL) {
             Logger::ERROR_LOGGER->flush();
@@ -91,13 +91,13 @@ public:
         fb->setDepthTest(true, LESS);
 		fb->setViewport(vec4<GLint>(0, 0, x, y));
         ui->reshape(x, y);
-        GlutWindow::reshape(x, y);
+        GlfwWindow::reshape(x, y);
         idle(false);
     }
 
     virtual void idle(bool damaged)
     {
-        GlutWindow::idle(damaged);
+        GlfwWindow::idle(damaged);
         if (damaged) {
             updateResources();
         }
