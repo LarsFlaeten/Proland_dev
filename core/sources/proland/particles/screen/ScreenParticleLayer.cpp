@@ -693,7 +693,7 @@ void ScreenParticleLayer::getParticleDepths(const vector<ScreenParticle*> &parti
 
         packer = new Program(new Module(330, packerShader));
 
-        mesh = new Mesh<vec3f, unsigned int>(POINTS, CPU, maxParticles);
+        mesh = new Mesh<vec3f, unsigned int>(POINTS, GPU_DYNAMIC, maxParticles);
         mesh->addAttributeType(0, 3, A32F, false);
 
         depthTextureU = packer->getUniformSampler("depthTexture");
