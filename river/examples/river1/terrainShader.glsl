@@ -25,8 +25,8 @@
  * Authors: Eric Bruneton, Antoine Begault, Guillaume Piolat.
  */
 
-#extension GL_EXT_gpu_shader4 : enable
-#extension GL_ARB_texture_rectangle : enable
+//#extension GL_EXT_gpu_shader4 : enable
+//#extension GL_ARB_texture_rectangle : enable
 
 struct samplerTile {
     sampler2DArray tilePool; // tile cache
@@ -127,7 +127,7 @@ void getSpriteParam(in float id, out SpriteParam param) {
     float nRows = ceil(float(maxRiverParticlesParams) / 4.0);
     int j = 0;
     for (float i = 0.0; i < nRows; i++) {
-        vec4 v = texelFetch2D(river.spriteParamTable, ivec2(i, id), 0);
+        vec4 v = texelFetch(river.spriteParamTable, ivec2(i, id), 0);
         params[j] = v.x;
         params[j + 1] = v.y;
         params[j + 2] = v.z;
@@ -179,14 +179,14 @@ vec2 advectedSlopes(SpriteList sprites, vec3 p, vec2 st, vec2 gradx, vec2 grady)
 
         if (s <= 1.0) {
             vec2 rCoord = (p.xy - param.wPos) + param.oPos;
-            vec2 slopesVal = texture2DGrad(river.wave.patternTex, rCoord / river.wave.length, gradx, grady).xy;
+            vec2 slopesVal = textureGrad(river.wave.patternTex, rCoord / river.wave.length, gradx, grady).xy;
             float weight = smoothFunc(1.0 - s) * smoothFunc(param.intensity);
             sumWeightedSlopes += slopesVal * weight;
             sumWeight += weight * weight;
         }
     }
 
-    return sumWeight > 0.0 ? sumWeightedSlopes / sqrt(sumWeight) : texture2DGrad(river.wave.patternTex, p.xy / river.wave.length, gradx, grady).xy;
+    return sumWeight > 0.0 ? sumWeightedSlopes / sqrt(sumWeight) : textureGrad(river.wave.patternTex, p.xy / river.wave.length, gradx, grady).xy;
 }
 
 void main() {
