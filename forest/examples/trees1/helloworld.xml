@@ -103,10 +103,10 @@
 
     <module name="normalShader" version="330" source="normalShader.glsl"/>
 
-    <module name="selectTreeShader" version="400" source="selectTreeShader.glsl"
-        feedback="interleaved" varyings="pos,params"/>
+    <module name="selectTreeShader" version="330" source="selectTreeShader.glsl"
+        feedback="interleaved" varyings="pos,p_n,p_colorsize,p_seeds"/>
 
-    <module name="renderTreeShader" version="400" source="renderTreeShader.glsl">
+    <module name="renderTreeShader" version="330" source="renderTreeShader.glsl">
         <uniformSampler name="treeSampler" texture="basictree"/>
     </module>
 

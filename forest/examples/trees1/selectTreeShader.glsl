@@ -25,7 +25,15 @@
  * Authors: Eric Bruneton, Antoine Begault, Guillaume Piolat.
  */
 
-#extension GL_EXT_gpu_shader4 : enable
+//#extension GL_EXT_gpu_shader4 : enable
+
+float rand(vec2 co){
+        return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+float rand(float x){
+        return fract(sin(x*(12.9898+78.233)) * 43758.5453);
+}
 
 #ifdef _VERTEX_
 
@@ -52,7 +60,10 @@ layout(points) in;
 layout(points,max_vertices=1) out;
 in vec3 pt[];
 out vec3 pos;
-out vec3 params;
+out vec2 p_n;
+out vec4 p_colorsize;
+out vec4 p_seeds;
+
 
 void main()
 {
@@ -60,13 +71,22 @@ void main()
         float z = textureTile(elevationSampler, pt[0].xy).z - 0.35;
         vec2 n = textureTile(fragmentNormalSampler, pt[0].xy).xy;
         pos = vec3(pt[0].xy * tileOffset.z + tileOffset.xy, z);
-        vec4 seeds = unpackUnorm4x8(floatBitsToUint(pt[0].z));
+        //vec4 seeds = unpackUnorm4x8(floatBitsToUint(pt[0].z));
+        // we replace above by a (quite) random function
+        vec4 seeds;
+        seeds.r = rand(pt[0].z);
+        seeds.g = rand(seeds.r);
+        seeds.b = rand(seeds.g);
+        seeds.a = rand(seeds.b);
         vec3 color = vec3(1.0) + (seeds.rgb - vec3(0.5)) * vec3(0.45, 0.45, 0.75);
         float size = mix(0.8, 1.2, seeds.w) * 0.5;
         float seed = dot(seeds, vec4(0.25));
-        params = vec3(uintBitsToFloat(packUnorm2x16(n)),
-                    uintBitsToFloat(packUnorm4x8(vec4(color, size))),
-                    uintBitsToFloat(packUnorm4x8(vec4(seed, 0.0, 0.0, 0.0))));
+        //params = vec3(uintBitsToFloat(packUnorm2x16(n)),
+        //            uintBitsToFloat(packUnorm4x8(vec4(color, size))),
+        //            uintBitsToFloat(packUnorm4x8(vec4(seed, 0.0, 0.0, 0.0))));
+        p_n = n;
+        p_colorsize = vec4(color, size);
+        p_seeds = vec4(seed, 0.0, 0.0, 0.0);
         EmitVertex();
         EndPrimitive();
     }
