@@ -24,6 +24,8 @@ Proland is made of a core library and of 7 plugins:
 * Edit plugin
 
 ##Screen Shots
+Below is a screenshot of the use of precomputed atmospheric scattering.
+![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/Atmo_test.png "Test of precomputed atmospheric scattering")
 
 ![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/Procedural_landscape_test.png "Procedural landscape test")
 
@@ -32,7 +34,8 @@ Proland is made of a core library and of 7 plugins:
 ![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/Blue_marble_test.png "First earth test (with low res texture)")
 
 ## Current status
-* The core librabry with examples is fully tested and included.
-* The Terrain plugin with examples is fully tested and included.
-* The Graph and Edit plugins are under testing/development.
+* The core librabry with examples is tested and included.
+* The Terrain plugin with examples is tested and included.
+* The Graph, Edit and River plugins are tested and included.
+* Atmospheric module included
 
