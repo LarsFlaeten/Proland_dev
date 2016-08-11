@@ -27,6 +27,9 @@ Proland is made of a core library and of 7 plugins:
 Below is a screenshot of the use of precomputed atmospheric scattering.
 ![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/Atmo_test.png "Test of precomputed atmospheric scattering")
 
+Below is a screenshot of the use of precomputed atmospheric scattering together with the ocean module, using the Ocean FFT algorithm.
+![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/Ocean_and_atmo2.png "Test of precomputed atmospheric scattering and ocean")
+
 ![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/Procedural_landscape_test.png "Procedural landscape test")
 
 ![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/first_procedural_planet.png "First procedural planet")
