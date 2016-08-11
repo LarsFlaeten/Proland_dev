@@ -2,7 +2,8 @@
 
 My development clone of Inria's Proland:
 [Proland home page](http://proland.imag.fr/)
-The goal is to update and modify the Porlan code to be in accordance with OpenGL 3.3, and to work on a standard laptop with intel HD Graphics (Proland was earlier tested only on NVIDIA hardware).
+
+The goal is to update and modify the Proland code to be in accordance with OpenGL 3.3, and to work on a standard laptop with intel HD Graphics (Proland was earlier tested only on NVIDIA hardware).
    
 ##Introduction
 Proland is a C++/OpenGL library for the real-time rendering of multi-resolution terrains (up to whole planets), the real-time management and edition of vector data (representing for instance roads or rivers), the rendering of atmosphere and clouds, the rendering and animation of the oceans, and the rendering of forests. All data are loaded or generated on the fly according to the viewpoint, and can be combined procedurally. For instance the shape and texture of a terrain can be modified using vector data representing roads and rivers.
