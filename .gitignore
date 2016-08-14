@@ -4,5 +4,6 @@
 /bin/
 # Ignore library output directory
 /lib/
-# Ignore demo dir (for now)
-/demo/
+# Ignore demo binary in demo dir
+/demo/demo
+# Ignore data director (23 GB...)
