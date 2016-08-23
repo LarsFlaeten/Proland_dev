@@ -112,6 +112,41 @@ public:
             updateResources();
         }
 
+        // Update globals manually
+        // Since it seems to not work to update all the modulesin separate programs with global vaiables (such as light dir etc)
+        vec3d sunDir, camPos;
+        SceneManager::NodeIterator i = scene->getNodes("light");
+        if(i.hasNext())
+        {
+            ptr<SceneNode> l = i.next();
+            sunDir = l->getWorldPos();
+        }
+        camPos = scene->getCameraNode()->getWorldPos();
+        cout << "worldSunDir: "<< sunDir.x << ", " << sunDir.y << ", " << sunDir.z << endl;
+        cout << "worldCameraPos: "<< camPos.x << ", " << camPos.y << ", " << camPos.z << endl;
+        ptr<Module> globals = scene->getCameraNode()->getModule("globals");
+       
+        i = scene->getNodes("object");
+        while(i.hasNext())
+        {
+            ptr<SceneNode> n = i.next();
+            ptr<Module> m = n->getModule("material");
+            if(m != NULL)
+            {
+                ptr<Program> prog = *(m->getUsers().begin());
+                if(prog != NULL)
+                {
+                    //vec3f v = prog->getUniform3f("worldSunDir")->get();
+                    prog->getUniform3f("worldSunDir")->set(vec3f(sunDir.x, sunDir.y, sunDir.z));
+                    prog->getUniform3f("worldCameraPos")->set(vec3f(camPos.x, camPos.y, camPos.z));
+                    
+                    int x = 0;
+                }
+                int y = 0;
+            }
+        }
+        
+        
         this->t = t;
         ui->redisplay(t, dt);
         GlfwWindow::redisplay(t, dt);
