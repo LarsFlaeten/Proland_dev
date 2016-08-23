@@ -7,3 +7,6 @@
 # Ignore demo binary in demo dir
 /demo/demo
 # Ignore data director (23 GB...)
+/data
+#ignore log files
+*.html
