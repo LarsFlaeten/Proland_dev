@@ -25,7 +25,7 @@
  * Authors: Eric Bruneton, Antoine Begault, Guillaume Piolat.
  */
 
-//#extension GL_EXT_gpu_shader4 : enable
+#extension GL_EXT_gpu_shader4 : enable
 
 uniform float maxTreeDistance;
 uniform vec3 cameraRefPos;
@@ -43,23 +43,16 @@ bool isVisible(mat4 l2s, vec4 c, float r) {
 }
 
 layout(location=0) in vec3 lPos;
-layout(location=1) in vec2 lP_n;
-layout(location=2) in vec4 lP_colorsize;
-layout(location=3) in vec4 lP_seeds;
-
+layout(location=1) in vec3 lParams;
 out vec3 gPos;
-out vec2 gP_n;
-out vec4 gP_colorsize;
-out vec4 gP_seeds;
+out vec3 gParams;
 out float generate;
 
 void main()
 {
     gPos = (localToTangentFrame * vec4(lPos - vec3(cameraRefPos.xy, 0.0), 1.0)).xyz;
-    gP_n = lP_n;
-    gP_colorsize = lP_colorsize;
-    gP_seeds = lP_seeds;
-    float seed = lP_seeds.x;
+    gParams = lParams;
+    float seed = unpackUnorm4x8(floatBitsToUint(lParams.z)).x;
     float maxDist = maxTreeDistance * (0.8 + 0.2 * seed);
     generate = length(vec3(gPos.xy,gPos.z-focalPos.z)) < maxDist && isVisible(tangentFrameToScreen, vec4(gPos + vec3(0.0, 0.0, 7.5), 1.0), 7.5) ? 1.0 : 0.0;
 }
@@ -72,9 +65,7 @@ layout(points) in;
 layout(triangle_strip,max_vertices=4) out;
 
 in vec3 gPos[];
-in vec2 gP_n[];
-in vec4 gP_colorsize[];
-in vec4 gP_seeds[];
+in vec3 gParams[];
 in float generate[];
 
 out vec2 uv;
@@ -84,9 +75,9 @@ void main()
 {
     if (generate[0] > 0.5) {
         vec3 wPos = (tangentFrameToWorld * vec4(gPos[0], 1.0)).xyz; // world pos
-        vec2 lN = gP_n[0] * 2.0 - vec2(1.0); // normal in tangent frame
+        vec2 lN = unpackUnorm2x16(floatBitsToUint(gParams[0].x)) * 2.0 - vec2(1.0); // normal in tangent frame
         vec3 wN = (tangentFrameToWorld * vec4(lN, sqrt(max(0.0, 1.0 - dot(lN, lN))), 0.0)).xyz; // world normal
-        vec4 colorAndSize = gP_colorsize[0];
+        vec4 colorAndSize = unpackUnorm4x8(floatBitsToUint(gParams[0].y));
 
         lightColor = colorAndSize.rgb * max(dot(wN, normalize(vec3(1.0))), 0.0) * 5.0;
 
