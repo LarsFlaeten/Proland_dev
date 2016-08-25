@@ -25,7 +25,7 @@
  * Authors: Eric Bruneton, Antoine Begault, Guillaume Piolat.
  */
 
-#extension GL_EXT_gpu_shader4 : require
+//#extension GL_EXT_gpu_shader4 : require
 
 #include "textureTile.glsl"
 
@@ -98,7 +98,7 @@ void main() {
 
 #ifdef _GEOMETRY_
 
-#extension GL_EXT_geometry_shader4 : enable
+//#extension GL_EXT_geometry_shader4 : enable
 
 layout (points) in;
 layout (triangle_strip, max_vertices=4) out;
@@ -124,7 +124,7 @@ void main() {
     terrainId = terrainIdOut[0];
 
     if (terrainId > -0.5) {
-        vec2 pos = gl_PositionIn[0].xy;
+        vec2 pos = gl_in[0].gl_Position.xy;
         vec2 p = 2.0 * (pos - vec2(radius)) / river.screenSize - 1.0;
         gl_Position = vec4(p, 0.0, 1.0);
         EmitVertex();
@@ -156,7 +156,7 @@ layout(location=0) out vec4 data;
 void main() {
     vec4 pos = gl_FragCoord;
     vec2 st = pos.xy;
-    pos = 2.0 * vec4(pos.xy / river.screenSize, texture2D(depthSampler, st / river.screenSize).x, 1.0) - 1.0;
+    pos = 2.0 * vec4(pos.xy / river.screenSize, texture(depthSampler, st / river.screenSize).x, 1.0) - 1.0;
 
     vec4 realWPos = terrainInfos[0].screenToLocal * pos;
     realWPos /= realWPos.w;
