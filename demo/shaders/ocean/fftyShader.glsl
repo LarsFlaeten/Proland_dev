@@ -1,3 +1,4 @@
+// FFTYSHADER.GLSL
 /*
  * Proland: a procedural landscape rendering library.
  * Copyright (c) 2008-2011 INRIA
@@ -38,8 +39,8 @@ void main() {
 #endif
 
 #ifdef _GEOMETRY_
-#extension GL_EXT_gpu_shader4 : enable
-#extension GL_EXT_geometry_shader4 : enable
+//#extension GL_EXT_gpu_shader4 : enable
+//#extension GL_EXT_geometry_shader4 : enable
 
 uniform int nLayers;
 
@@ -53,13 +54,13 @@ void main() {
     for (int i = 0; i < nLayers; ++i) {
         gl_Layer = i;
         gl_PrimitiveID = i;
-        gl_Position = gl_PositionIn[0];
+        gl_Position = gl_in[0].gl_Position;
         uv = uvIn[0];
         EmitVertex();
-        gl_Position = gl_PositionIn[1];
+        gl_Position = gl_in[1].gl_Position;
         uv = uvIn[1];
         EmitVertex();
-        gl_Position = gl_PositionIn[2];
+        gl_Position = gl_in[2].gl_Position;
         uv = uvIn[2];
         EmitVertex();
         EndPrimitive();
@@ -69,7 +70,7 @@ void main() {
 #endif
 
 #ifdef _FRAGMENT_
-#extension GL_EXT_gpu_shader4 : enable
+//#extension GL_EXT_gpu_shader4 : enable
 
 uniform sampler2D butterflySampler;
 uniform sampler2DArray imgSampler; // 2 complex inputs (= 4 values) per layer

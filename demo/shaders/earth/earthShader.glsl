@@ -1,3 +1,4 @@
+// EARTHSHADER.GLSL
 /*
  * Proland: a procedural landscape rendering library.
  * Copyright (c) 2008-2011 INRIA
@@ -39,7 +40,7 @@ uniform samplerTile vertexNormalSampler;
 uniform samplerTile fragmentNormalSampler;
 uniform samplerTile orthoSampler;
 uniform samplerTile ambientApertureSampler;
-uniform samplerTile lccSampler;
+//uniform samplerTile lccSampler;
 
 uniform struct {
     vec4 offset;
@@ -210,11 +211,11 @@ void main() {
     // diffuse ground color
     vec3 groundColor = reflectance.rgb * (sunL * max(cTheta, 0.0) + skyE) / 3.14159265;
 
-    vec4 lcc = textureTile(lccSampler, uv);
-    if (lcc.r > 0.0) { // TODO need also if lcc.r=0?
-    	float d = length(vec3(q.xy, q.z - deformation.camera.w));
-        groundColor = treeBrdf(q, d, lcc, v, fn, WSD, V, reflectance.rgb, sunL, skyE);
-    }
+    //vec4 lcc = textureTile(lccSampler, uv);
+    //if (lcc.r > 0.0) { // TODO need also if lcc.r=0?
+    //	float d = length(vec3(q.xy, q.z - deformation.camera.w));
+    //    groundColor = treeBrdf(q, d, lcc, v, fn, WSD, V, reflectance.rgb, sunL, skyE);
+    //}
 
 #ifndef OTHER_PLANET
     // water specular color due to sunLight

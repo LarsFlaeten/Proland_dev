@@ -1,3 +1,4 @@
+// OCEANFFTSHADER.GLSL
 /*
  * Proland: a procedural landscape rendering library.
  * Copyright (c) 2008-2011 INRIA
@@ -88,14 +89,14 @@ void main() {
     vec2 duy = oceanPos(vertex + vec3(0.0, gridSize.y, 0.0)) - u;
     vec3 dP = vec3(0.0, 0.0, heightOffset + (radius > 0.0 ? 0.0 : Z0));
     if (duy.x != 0.0 || duy.y != 0.0) {
-        dP.z += texture2DArrayGrad(fftWavesSampler, vec3(u / GRID_SIZES.x, 0.0), dux / GRID_SIZES.x, duy / GRID_SIZES.x).x;
-        dP.z += texture2DArrayGrad(fftWavesSampler, vec3(u / GRID_SIZES.y, 0.0), dux / GRID_SIZES.y, duy / GRID_SIZES.y).y;
-        dP.z += texture2DArrayGrad(fftWavesSampler, vec3(u / GRID_SIZES.z, 0.0), dux / GRID_SIZES.z, duy / GRID_SIZES.z).z;
-        dP.z += texture2DArrayGrad(fftWavesSampler, vec3(u / GRID_SIZES.w, 0.0), dux / GRID_SIZES.w, duy / GRID_SIZES.w).w;
-        dP.xy += CHOPPY_FACTOR * texture2DArrayGrad(fftWavesSampler, vec3(u / GRID_SIZES.x, 3.0), dux / GRID_SIZES.x, duy / GRID_SIZES.x).xy;
-        dP.xy += CHOPPY_FACTOR * texture2DArrayGrad(fftWavesSampler, vec3(u / GRID_SIZES.y, 3.0), dux / GRID_SIZES.y, duy / GRID_SIZES.y).zw;
-        dP.xy += CHOPPY_FACTOR * texture2DArrayGrad(fftWavesSampler, vec3(u / GRID_SIZES.z, 4.0), dux / GRID_SIZES.z, duy / GRID_SIZES.z).xy;
-        dP.xy += CHOPPY_FACTOR * texture2DArrayGrad(fftWavesSampler, vec3(u / GRID_SIZES.w, 4.0), dux / GRID_SIZES.w, duy / GRID_SIZES.w).zw;
+        dP.z += textureGrad(fftWavesSampler, vec3(u / GRID_SIZES.x, 0.0), dux / GRID_SIZES.x, duy / GRID_SIZES.x).x;
+        dP.z += textureGrad(fftWavesSampler, vec3(u / GRID_SIZES.y, 0.0), dux / GRID_SIZES.y, duy / GRID_SIZES.y).y;
+        dP.z += textureGrad(fftWavesSampler, vec3(u / GRID_SIZES.z, 0.0), dux / GRID_SIZES.z, duy / GRID_SIZES.z).z;
+        dP.z += textureGrad(fftWavesSampler, vec3(u / GRID_SIZES.w, 0.0), dux / GRID_SIZES.w, duy / GRID_SIZES.w).w;
+        dP.xy += CHOPPY_FACTOR * textureGrad(fftWavesSampler, vec3(u / GRID_SIZES.x, 3.0), dux / GRID_SIZES.x, duy / GRID_SIZES.x).xy;
+        dP.xy += CHOPPY_FACTOR * textureGrad(fftWavesSampler, vec3(u / GRID_SIZES.y, 3.0), dux / GRID_SIZES.y, duy / GRID_SIZES.y).zw;
+        dP.xy += CHOPPY_FACTOR * textureGrad(fftWavesSampler, vec3(u / GRID_SIZES.z, 4.0), dux / GRID_SIZES.z, duy / GRID_SIZES.z).xy;
+        dP.xy += CHOPPY_FACTOR * textureGrad(fftWavesSampler, vec3(u / GRID_SIZES.w, 4.0), dux / GRID_SIZES.w, duy / GRID_SIZES.w).zw;
     }
     gl_Position = cameraToScreen * vec4(t * cameraDir + oceanToCamera * dP, 1.0);
     oceanU = u;
@@ -126,10 +127,10 @@ void main() {
     vec3 oceanCamera = vec3(0.0, 0.0, oceanCameraPos.z);
     vec3 V = normalize(oceanCamera - oceanP);
 
-    vec2 slopes = texture2DArray(fftWavesSampler, vec3(u / GRID_SIZES.x, 1.0)).xy;
-    slopes += texture2DArray(fftWavesSampler, vec3(u / GRID_SIZES.y, 1.0)).zw;
-    slopes += texture2DArray(fftWavesSampler, vec3(u / GRID_SIZES.z, 2.0)).xy;
-    slopes += texture2DArray(fftWavesSampler, vec3(u / GRID_SIZES.w, 2.0)).zw;
+    vec2 slopes = texture(fftWavesSampler, vec3(u / GRID_SIZES.x, 1.0)).xy;
+    slopes += texture(fftWavesSampler, vec3(u / GRID_SIZES.y, 1.0)).zw;
+    slopes += texture(fftWavesSampler, vec3(u / GRID_SIZES.z, 2.0)).xy;
+    slopes += texture(fftWavesSampler, vec3(u / GRID_SIZES.w, 2.0)).zw;
     if (radius > 0.0) {
         slopes -= oceanP.xy / (radius + oceanP.z);
     }

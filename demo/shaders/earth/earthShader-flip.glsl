@@ -1,3 +1,4 @@
+// EARTHSHADER-FLIP.GLSL
 /*
  * Proland: a procedural landscape rendering library.
  * Copyright (c) 2008-2011 INRIA
@@ -29,7 +30,7 @@
 #include "earthShader.glsl"
 
 #ifdef _GEOMETRY_
-#extension GL_EXT_geometry_shader4 : enable
+//#extension GL_EXT_geometry_shader4 : enable
 
 layout (lines_adjacency) in;
 layout (triangle_strip,max_vertices=4) out;
@@ -46,7 +47,7 @@ out vec3 n;
 out vec2 uv;
 
 void emit(int i) {
-    gl_Position = gl_PositionIn[i];
+    gl_Position = gl_in[i].gl_Position;
     h = hIn[i];
     p = pIn[i];
     n = nIn[i];

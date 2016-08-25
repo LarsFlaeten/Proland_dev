@@ -29,5 +29,5 @@
   <uniformSampler name="Phase1" texture="Mie-RGB"/>
   <uniformSampler name="Phase2" texture="Mie-Lum"/>
   <uniformSampler name="BlurredTransp" texture="Mie-TransBlur"/>
-  <uniformSampler name="Params" texture="Params"/>
+  <uniformSampler name="Params" texture="params"/>
 </module>
