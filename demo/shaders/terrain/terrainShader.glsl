@@ -1,3 +1,4 @@
+// TERRANSHADER.GLSL
 /*
  * Proland: a procedural landscape rendering library.
  * Copyright (c) 2008-2011 INRIA
@@ -51,8 +52,8 @@ uniform struct {
 
 #ifdef RIVERS
 
-#extension GL_EXT_gpu_shader4 : enable
-#extension GL_ARB_texture_rectangle : enable
+//#extension GL_EXT_gpu_shader4 : enable
+//#extension GL_ARB_texture_rectangle : enable
 
 #include "oceanBrdf.glhl"
 
@@ -153,7 +154,7 @@ void getSpriteParam(in float id, out SpriteParam param) {
     float nRows = ceil(float(maxRiverParticlesParams) / 4.0);
     int j = 0;
     for (float i = 0.0; i < nRows; i++) {
-        vec4 v = texelFetch2D(river.spriteParamTable, ivec2(i, id), 0);
+        vec4 v = texelFetch(river.spriteParamTable, ivec2(i, id), 0);
         params[j] = v.x;
         params[j + 1] = v.y;
         params[j + 2] = v.z;
@@ -206,7 +207,7 @@ vec2 advectedSlopes(SpriteList sprites, vec2 st, vec2 gradx, vec2 grady) {
 
         if (s <= 1.0) {
             vec2 rCoord = (p.xy - param.wPos) + param.oPos;
-            vec2 slopesVal = texture2DGrad(river.wave.patternTex, rCoord / river.wave.length, gradx, grady).xy;
+            vec2 slopesVal = textureGrad(river.wave.patternTex, rCoord / river.wave.length, gradx, grady).xy;
             float weight = smoothFunc(1.0 - s) * smoothFunc(param.intensity);
             sumWeightedSlopes += slopesVal * weight;
             sumWeight += weight * weight;
@@ -307,10 +308,10 @@ void main() {
 // COMPUTING ADVECTED NORMAL
                 vec2 slopes;
                 if (river.drawMode == 6.0) {
-                    vec4 col = texture2D(river.riverTex, st / river.screenSize);
+                    vec4 col = texture(river.riverTex, st / river.screenSize);
                     slopes = col.xy / sqrt(col.z);
                     if (col.z == 0.0 ) {
-                        slopes = texture2DGrad(river.wave.patternTex, p.xy / river.wave.length, gradx, grady).xy;
+                        slopes = textureGrad(river.wave.patternTex, p.xy / river.wave.length, gradx, grady).xy;
                     }
                 } else {
                     slopes = advectedSlopes(sprites, st, gradx, grady);
