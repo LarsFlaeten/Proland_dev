@@ -1,3 +1,4 @@
+// FRACTALTERRAINSHADER.GLSL
 /*
  * Proland: a procedural landscape rendering library.
  * Copyright (c) 2008-2011 INRIA
@@ -31,7 +32,7 @@
 uniform samplerTile elevationSampler;
 uniform samplerTile fragmentNormalSampler;
 uniform samplerTile orthoSampler;
-uniform samplerTile lccSampler;
+//uniform samplerTile lccSampler;
 
 uniform struct {
     vec4 offset;
@@ -105,11 +106,11 @@ void main() {
         groundColor = oceanRadiance(-v, fn, WSD, getSeaRoughness(), sunL, skyE);
     }
 
-    vec4 lcc = textureTile(lccSampler, uv);
-    if (lcc.x > 0.0) {
-        float d = length(vec3(q.xy, q.z - deformation.camera.w));
-        groundColor = treeBrdf(q, d, lcc, v, fn, WSD, vec3(0.0, 0.0, 1.0), reflectance, sunL, skyE);
-    }
+//    vec4 lcc = textureTile(lccSampler, uv);
+//    if (lcc.x > 0.0) {
+//        float d = length(vec3(q.xy, q.z - deformation.camera.w));
+//        groundColor = treeBrdf(q, d, lcc, v, fn, WSD, vec3(0.0, 0.0, 1.0), reflectance, sunL, skyE);
+//    }
 
     vec3 extinction;
     vec3 inscatter = inScattering(WCP, p, WSD, extinction, 0.0);
