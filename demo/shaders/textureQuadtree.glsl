@@ -1,3 +1,4 @@
+// TEXTUREQUADTREE.GLSL
 /*
  * Proland: a procedural landscape rendering library.
  * Copyright (c) 2008-2011 INRIA
@@ -26,7 +27,7 @@
  */
 
 #ifdef GL_EXT_texture_array
-#extension GL_EXT_texture_array : enable
+//#extension GL_EXT_texture_array : enable
 #endif
 
 const vec2 TILE_MAP_SIZE = vec2(1.0 / 4096.0, 1.0 / 8.0);
