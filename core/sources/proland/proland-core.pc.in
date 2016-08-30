@@ -7,4 +7,4 @@ Description: OpenGL Rendering Kernel
 Version: @PROLAND_VERSION@
 Requires:
 Libs: -L${libdir} -lproland-core
-Cflags: -I${includedir} @ORK_CFLAGS@
+Cflags: -I${includedir} @PROLAND_CFLAGS@ @ORK_CFLAGS@
