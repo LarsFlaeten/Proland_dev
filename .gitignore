@@ -4,6 +4,7 @@
 /bin/
 # Ignore library output directory
 /lib/
+/libraries/
 # Ignore demo binary in demo dir
 /demo/demo
 # Don't bring along the precomputed atmosperic scattering textures
