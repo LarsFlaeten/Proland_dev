@@ -6,6 +6,8 @@
 /lib/
 # Ignore demo binary in demo dir
 /demo/demo
+# Dont bring alogn the precomputed atmosperic scattering textures
+/demo/textures/atmo/*.raw
 # Ignore data director (23 GB...)
 /data
 #ignore log files
