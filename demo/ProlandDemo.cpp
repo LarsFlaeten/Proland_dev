@@ -114,7 +114,7 @@ public:
 
         // Update globals manually
         // Since it seems to not work to update all the modulesin separate programs with global vaiables (such as light dir etc)
-        vec3d sunDir, camPos;
+/*        vec3d sunDir, camPos;
         SceneManager::NodeIterator i = scene->getNodes("light");
         if(i.hasNext())
         {
@@ -145,7 +145,7 @@ public:
                 int y = 0;
             }
         }
-        
+ */       
         
         this->t = t;
         ui->redisplay(t, dt);
@@ -522,6 +522,7 @@ void initProlandDemo(const string &archive, const string &data, const string &ev
 
 int main(int argc, char *argv[])
 {
+
     assert(argc > 2);
     initTerrainPlugin();
     initEditPlugin();
