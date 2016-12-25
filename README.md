@@ -26,6 +26,17 @@ Proland is made of a core library and of 7 plugins:
 * Edit plugin
 
 ##Screen Shots
+Some new screen shots using srtm/blue marble data sets
+
+![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/blue_marble.png "Earth with clouds")
+
+![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/italy.png "Italy")
+
+![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/Pico_do_fogo.png "Cape Verde islands, Pico do Fogo")
+
+
+
+
 Below is a screenshot of the use of precomputed atmospheric scattering.
 ![alt text](https://raw.githubusercontent.com/LarsFlaeten/Proland_dev/master/web/Atmo_test.png "Test of precomputed atmospheric scattering")
 
