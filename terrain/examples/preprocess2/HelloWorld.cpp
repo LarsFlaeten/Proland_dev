@@ -329,8 +329,17 @@ void init()
 
 int main(int argc, char* argv[])
 {
+	// Scale for moon. From the LOLA data sets:
+    // http://imbrium.mit.edu/DATA/SLDEM2015/GLOBAL/FLOAT_IMG/                  SLDEM2015_256_60S_60N_000_360_FLOAT.LBL
+    //   MAXIMUM               = 10.781 [km]
+    //   MINIMUM               = -8.717 [km]
+    // These DEMs use a reference radius of 1737.4 km, and the DEM is +/-
+    // We change the radius to r = 1728.683 km, with a scale of 19.498 km
+    // for the heights. Max radius is then 1748.181km
+    //
+
+    
     preprocessSphericalDem(new MyMap("Moon_1024.png", 19498.0 / 255.0, 1024, 512, 1), 24, 192, 2, "data/dem", "tmpDem", 1.0);
-    //preprocessSphericalAperture("data/dem", 3, 5, 3, "data/dem/aperture", "tmpAperture");
     preprocessSphericalOrtho(new MyMap("Moon_1024.png", 1.0, 1024, 512, 1), 192, 4, 2, "data/rgb", "tmpOrtho");
     atexit(Object::exit);
     init();
