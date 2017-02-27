@@ -236,6 +236,6 @@
         <editor id="scene" bar="editScene" exclusive="false"/>
     </tweakBarManager>
 
-    <helloworld name="window" ui="tweakBar" view="viewHandler" radius="6360000.0"/>
+    <helloworld name="window" ui="tweakBar" view="viewHandler" radius="1748000.0"/>
 
 </archive>
