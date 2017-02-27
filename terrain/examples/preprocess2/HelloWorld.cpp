@@ -321,7 +321,6 @@ void init()
     ptr<XMLResourceLoader> resLoader = new XMLResourceLoader();
     resLoader->addPath(".");
     resLoader->addArchive("helloworld.xml");
-    resLoader->addPath("e:/data");
 
     ptr<ResourceManager> resManager = new ResourceManager(resLoader, 8);
 
