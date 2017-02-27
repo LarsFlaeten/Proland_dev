@@ -29,5 +29,7 @@ target_link_libraries(${EXENAME} -Wl,--whole-archive proland-core ork -Wl,--no-w
 add_custom_command(TARGET ${EXENAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR} ${EXECUTABLE_OUTPUT_PATH})
 add_custom_command(TARGET ${EXENAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/../common ${EXECUTABLE_OUTPUT_PATH})
+add_custom_command(TARGET ${EXENAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E remove ${EXECUTABLE_OUTPUT_PATH}/CMakeLists.txt)
 
